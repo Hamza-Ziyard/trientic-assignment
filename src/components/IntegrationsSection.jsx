@@ -187,8 +187,8 @@ const INTEGRATIONS = [
     logoSrc: '/images/brand-logos/GitLab_Symbol_2.webp',
     tileSize: 'w-[68px] h-[68px] xl:w-[74px] xl:h-[74px]',
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
-    position: 'lg:top-[34%] lg:left-[66.5%]',
-    expandShift: '-translate-x-12 -translate-y-2',
+    position: 'lg:top-[34%] lg:right-[28%]',
+    expandShift: 'translate-x-4 -translate-y-2',
     floatDelay: '-2.8s',
     floatDuration: '5.6s',
     suggestion:
@@ -202,7 +202,7 @@ const INTEGRATIONS = [
     tileSize: 'w-[78px] h-[78px] xl:w-[86px] xl:h-[86px]',
     iconSize: 'w-9 h-9 xl:w-10 xl:h-10',
     position: 'lg:top-[8%] lg:right-[11.5%]',
-    expandShift: '-translate-x-16 -translate-y-2',
+    expandShift: 'translate-x-4 -translate-y-2',
     floatDelay: '-0.5s',
     floatDuration: '5.9s',
     suggestion:
@@ -216,7 +216,7 @@ const INTEGRATIONS = [
     tileSize: 'w-[72px] h-[72px] xl:w-[78px] xl:h-[78px]',
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[62%] lg:right-[11%]',
-    expandShift: '-translate-x-16 -translate-y-2',
+    expandShift: 'translate-x-4 -translate-y-2',
     floatDelay: '-3.1s',
     floatDuration: '5.7s',
     suggestion:
@@ -230,7 +230,7 @@ const INTEGRATIONS = [
     tileSize: 'w-[74px] h-[74px] xl:w-[80px] xl:h-[80px]',
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[32%] lg:right-0',
-    expandShift: '-translate-x-[220px] -translate-y-2',
+    expandShift: 'translate-x-0 -translate-y-2',
     floatDelay: '-2.2s',
     floatDuration: '6.3s',
     suggestion:
