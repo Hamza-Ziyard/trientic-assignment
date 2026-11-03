@@ -5,10 +5,10 @@ import DayArcSection from './components/DayArcSection.jsx'
 import PrivacyInsightsSection from './components/PrivacyInsightsSection.jsx'
 import IntegrationsSection from './components/IntegrationsSection.jsx'
 import GettingStartedSection from './components/GettingStartedSection.jsx'
-import CtaBannerSection from './components/CtaBannerSection.jsx'
+import Footer from './components/Footer.jsx'
 
 // Adjust global spacing between page sections in this single constant
-const SECTION_SPACING = 'flex flex-col gap-16 sm:gap-20 lg:gap-[196px] pb-20 sm:pb-24 lg:pb-[120px]'
+const SECTION_SPACING = 'flex flex-col gap-16 sm:gap-20 lg:gap-[196px] pb-20 sm:pb-24 lg:pb-[240px]'
 
 export default function App() {
   return (
@@ -20,8 +20,8 @@ export default function App() {
         <PrivacyInsightsSection />
         <IntegrationsSection />
         <GettingStartedSection />
-        <CtaBannerSection />
       </main>
+      <Footer />
     </div>
   )
 }
