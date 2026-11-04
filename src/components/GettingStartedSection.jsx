@@ -8,7 +8,7 @@ const GETTING_STARTED_CARDS = [
     title: 'TimeFlow in 5 minutes',
     description:
       'A short video series that takes you from your first timer to your first shared timesheet.',
-    imageSrc: '/images/timeflow-intro.webp',
+    imageSrc: '/images/arc-images/09am.png',
     imageAlt: 'TimeFlow timer interface preview',
   },
   {
@@ -56,13 +56,13 @@ export default function GettingStartedSection() {
               <button
                 type="button"
                 aria-label={`Play video: ${card.title}`}
-                className="group relative w-full overflow-hidden rounded-[28px] text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
+                className="p-10 group relative w-full overflow-hidden rounded-[28px] text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
               >
                 <img
                   src={card.imageSrc}
                   alt={card.imageAlt}
                   loading="lazy"
-                  className="w-full h-auto object-cover block transition-transform duration-300 group-hover:scale-[1.015]"
+                  className="w-full h-auto object-cover block transition-transform duration-300 group-hover:scale-[1.015] shadow-sm"
                 />
 
                 {/* Subtle Tinted Overlay matching reference image */}

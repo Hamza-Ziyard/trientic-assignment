@@ -49,7 +49,7 @@ export default function Navbar() {
               className="inline-flex items-center select-none shrink-0"
             >
               <img
-                src="/images/logo/timeflow-logo.webp"
+                src="/images/logo/timeflow-logo.svg"
                 alt="TimeFlow"
                 className="h-6 sm:h-[26px] w-auto object-contain block"
               />
