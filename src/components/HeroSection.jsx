@@ -197,7 +197,7 @@ export default function HeroSection({ imageSrc = HERO_IMAGE_SRC }) {
             <div
               role="img"
               aria-label="Time management product showcase visual"
-              className="w-full overflow-hidden rounded-t-[20px] sm:rounded-t-[26px] lg:rounded-t-[30px] shadow-[0_24px_70px_rgba(0,0,0,0.06)] [mask-image:linear-gradient(to_bottom,black_62%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_62%,transparent_100%)]"
+              className="w-full overflow-hidden shadow-[0_24px_70px_rgba(0,0,0,0.06)] [mask-image:linear-gradient(to_bottom,black_62%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_62%,transparent_100%)]"
             >
               {imageSrc ? (
                 <img
