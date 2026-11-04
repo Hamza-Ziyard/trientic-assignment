@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { ArrowDownRight } from 'lucide-react'
+import React, { useEffect, useRef, useState } from 'react'
 import FadeInOnScroll from './FadeInOnScroll.jsx'
 
 function TypewriterText({ text, active, delayMs = 240, speedMs = 14 }) {
@@ -61,8 +60,7 @@ const INTEGRATIONS = [
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[32%] lg:left-0',
     expandShift: 'translate-x-0 -translate-y-2',
-    floatDelay: '-2.7s',
-    floatDuration: '5.8s',
+    dropDelayMs: 60,
     suggestion:
       'moved BRI-142 to In Review after 50m. Add to Sprint 04 — Frontend?',
   },
@@ -77,8 +75,7 @@ const INTEGRATIONS = [
     mobileIconClass: 'w-11 h-11 sm:w-12 sm:h-12 scale-125',
     position: 'lg:top-[6%] lg:left-[10%]',
     expandShift: '-translate-x-4 -translate-y-2',
-    floatDelay: '0s',
-    floatDuration: '5.4s',
+    dropDelayMs: 0,
     suggestion:
       'detected an 18m huddle in #client-brightloop. Log to Brightloop Website Redesign?',
   },
@@ -91,8 +88,7 @@ const INTEGRATIONS = [
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[62%] lg:left-[9%]',
     expandShift: '-translate-x-4 -translate-y-2',
-    floatDelay: '-0.8s',
-    floatDuration: '6.5s',
+    dropDelayMs: 140,
     suggestion:
       'tracked 1h 25m active in ‘Brightloop — Homepage v3’. Add to Design Phase?',
   },
@@ -105,8 +101,7 @@ const INTEGRATIONS = [
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[34%] lg:left-[20.5%]',
     expandShift: '-translate-x-6 -translate-y-2',
-    floatDelay: '-1.6s',
-    floatDuration: '6.1s',
+    dropDelayMs: 90,
     suggestion:
       'drafted copy variations for ‘Pricing Page’ (28m). Add to Content Strategy?',
   },
@@ -119,8 +114,7 @@ const INTEGRATIONS = [
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[8%] lg:left-[31%]',
     expandShift: '-translate-x-6 -translate-y-2',
-    floatDelay: '-1.3s',
-    floatDuration: '6.2s',
+    dropDelayMs: 40,
     suggestion:
       'edited ‘Q4 Brand Strategy Deck’ for 42m. Log to Northwind Rebrand?',
   },
@@ -133,8 +127,7 @@ const INTEGRATIONS = [
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[64%] lg:left-[31%]',
     expandShift: '-translate-x-6 -translate-y-2',
-    floatDelay: '-3.4s',
-    floatDuration: '5.5s',
+    dropDelayMs: 180,
     suggestion:
       'replied to 4 threads with Acme Corp (22m). Add to Client Comms?',
   },
@@ -147,8 +140,7 @@ const INTEGRATIONS = [
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[35%] lg:left-[42.5%]',
     expandShift: '-translate-x-8 -translate-y-2',
-    floatDelay: '-2.4s',
-    floatDuration: '5.9s',
+    dropDelayMs: 120,
     suggestion:
       'updated ‘Q3 Retainer Forecast & Hours’ (35m). Log to Agency Operations?',
   },
@@ -161,8 +153,7 @@ const INTEGRATIONS = [
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[6%] lg:left-[53.5%]',
     expandShift: '-translate-x-8 -translate-y-2',
-    floatDelay: '-1.9s',
-    floatDuration: '6.0s',
+    dropDelayMs: 70,
     suggestion:
       'spent 35m in ‘Design System Roadmap’. Add to Internal Product Ops?',
   },
@@ -175,8 +166,7 @@ const INTEGRATIONS = [
     iconSize: 'w-9 h-9 xl:w-10 xl:h-10 scale-110',
     position: 'lg:top-[62%] lg:left-[54%]',
     expandShift: '-translate-x-8 -translate-y-2',
-    floatDelay: '-0.9s',
-    floatDuration: '6.4s',
+    dropDelayMs: 210,
     suggestion:
       'researched API schema & edge cases (26m). Add to Kinetix Discovery?',
   },
@@ -189,8 +179,7 @@ const INTEGRATIONS = [
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[34%] lg:right-[28%]',
     expandShift: 'translate-x-4 -translate-y-2',
-    floatDelay: '-2.8s',
-    floatDuration: '5.6s',
+    dropDelayMs: 150,
     suggestion:
       'reviewed merge request !84 on core-api (40m). Add to Backend Retainer?',
   },
@@ -203,8 +192,7 @@ const INTEGRATIONS = [
     iconSize: 'w-9 h-9 xl:w-10 xl:h-10',
     position: 'lg:top-[8%] lg:right-[11.5%]',
     expandShift: 'translate-x-4 -translate-y-2',
-    floatDelay: '-0.5s',
-    floatDuration: '5.9s',
+    dropDelayMs: 100,
     suggestion:
       'pushed 6 commits to brightloop-site. Add 1h 10m to Brightloop Website Redesign?',
   },
@@ -217,8 +205,7 @@ const INTEGRATIONS = [
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[62%] lg:right-[11%]',
     expandShift: 'translate-x-4 -translate-y-2',
-    floatDelay: '-3.1s',
-    floatDuration: '5.7s',
+    dropDelayMs: 240,
     suggestion:
       'organized 12 assets in ‘Brightloop Handoff’ (30m). Add to Design Ops?',
   },
@@ -231,8 +218,7 @@ const INTEGRATIONS = [
     iconSize: 'w-8 h-8 xl:w-9 xl:h-9',
     position: 'lg:top-[32%] lg:right-0',
     expandShift: 'translate-x-0 -translate-y-2',
-    floatDelay: '-2.2s',
-    floatDuration: '6.3s',
+    dropDelayMs: 190,
     suggestion:
       '‘Weekly Design Sync’ just ended (45m). Log to Brightloop Retainer?',
   },
@@ -241,6 +227,35 @@ const INTEGRATIONS = [
 export default function IntegrationsSection() {
   // Null when nothing is hovered/selected; hovering or clicking a tile morphs it into the inline card
   const [activeId, setActiveId] = useState(null)
+  const [hasDroppedIn, setHasDroppedIn] = useState(false)
+  const stageRef = useRef(null)
+
+  useEffect(() => {
+    const el = stageRef.current
+    if (!el) return
+
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (prefersReducedMotion) {
+      setHasDroppedIn(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasDroppedIn(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.18 }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <section
@@ -253,7 +268,7 @@ export default function IntegrationsSection() {
       onClick={() => setActiveId(null)}
     >
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-[72px]">
-        {/* Top-Left Section Header (matching PrivacyInsightsSection & GettingStartedSection) */}
+        {/* Top-Left Section Header */}
         <FadeInOnScroll duration={1000}>
           <h2
             id="integrations-heading"
@@ -266,7 +281,6 @@ export default function IntegrationsSection() {
             Connect your docs, code, design and calendar. TimeFlow suggests entries from your real work, and you confirm every one.
           </p>
 
-
           <div className="mt-10 lg:mt-6 flex flex-col items-start">
             <div className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4">
               <a
@@ -278,17 +292,17 @@ export default function IntegrationsSection() {
 
               <a
                 href="#start-free"
-                 className="inline-flex items-center gap-2 text-[16px] font-semibold tracking-[-0.01em] text-[#070707] hover:opacity-75 transition-opacity px-4"
+                className="inline-flex items-center gap-2 text-[16px] font-semibold tracking-[-0.01em] text-[#070707] hover:opacity-75 transition-opacity px-4"
               >
                 Get started for free
               </a>
             </div>
-            </div>
+          </div>
         </FadeInOnScroll>
 
-        {/* Bottom Area: Scattered Logos + CTAs & Microcopy */}
-        <FadeInOnScroll delay={150} duration={1050}>
-          {/* DESKTOP SCATTERED FLOATING ICON TILES STAGE (lg+) */}
+        {/* Bottom Area: Scattered Logos + Microcopy */}
+        <div ref={stageRef}>
+          {/* DESKTOP SCATTERED ICON TILES STAGE (lg+) */}
           <div
             className="hidden lg:block relative w-full h-[320px] xl:h-[350px] mt-14"
             onMouseLeave={() => setActiveId(null)}
@@ -309,16 +323,18 @@ export default function IntegrationsSection() {
                     setActiveId(tool.id)
                   }}
                 >
-                  {/* Floating wrapper */}
+                  {/* One-time drop-down entrance wrapper when entering section */}
                   <div
-                    className="animate-float-slow"
                     style={{
-                      animationDelay: tool.floatDelay,
-                      animationDuration: tool.floatDuration,
-                      animationPlayState: isSelected ? 'paused' : 'running',
+                      transitionDelay: hasDroppedIn ? `${tool.dropDelayMs}ms` : '0ms',
                     }}
+                    className={`transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      hasDroppedIn
+                        ? 'translate-y-0 opacity-100'
+                        : '-translate-y-16 opacity-0'
+                    }`}
                   >
-                    {/* White Rounded Tile that first expands smoothly, then types in the text */}
+                    {/* White Rounded Tile that expands smoothly on hover/focus */}
                     <div
                       role="button"
                       tabIndex={0}
@@ -391,72 +407,78 @@ export default function IntegrationsSection() {
                 const isDimmed = activeId !== null && !isSelected
 
                 return (
-                  <button
+                  <div
                     key={tool.id}
-                    type="button"
-                    onClick={() => setActiveId(isSelected ? null : tool.id)}
-                    aria-label={`Show ${tool.name} time suggestion`}
                     style={{
-                      animationDelay: tool.floatDelay,
-                      animationDuration: tool.floatDuration,
+                      transitionDelay: hasDroppedIn ? `${tool.dropDelayMs}ms` : '0ms',
                     }}
-                    className={`overflow-hidden rounded-2xl bg-white border transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                      isSelected
-                        ? 'w-[300px] sm:w-[320px] min-h-[82px] p-4 border-stone-200/95 shadow-[0_16px_40px_rgba(2,44,34,0.12)] text-left'
-                        : `animate-float-slow w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center border-stone-200/90 shadow-sm ${
-                            isDimmed
-                              ? 'opacity-45 blur-[1.5px] scale-95'
-                              : 'opacity-100'
-                          }`
+                    className={`transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                      hasDroppedIn
+                        ? 'translate-y-0 opacity-100'
+                        : '-translate-y-12 opacity-0'
                     }`}
                   >
-                    {isSelected ? (
-                      <p className="text-[13px] leading-[1.48] text-stone-600">
-                        <span className="inline-flex items-center gap-1.5 align-middle mr-1.5">
-                          <img
-                            src={tool.logoSrc}
-                            alt=""
-                            className={`${
-                              tool.badgeIconClass || 'w-3.5 h-3.5'
-                            } object-contain shrink-0`}
-                          />
-                          <span
-                            className={`font-semibold text-[12.5px] ${tool.nameColor}`}
-                          >
-                            {tool.name}
+                    <button
+                      type="button"
+                      onClick={() => setActiveId(isSelected ? null : tool.id)}
+                      aria-label={`Show ${tool.name} time suggestion`}
+                      className={`overflow-hidden rounded-2xl bg-white border transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                        isSelected
+                          ? 'w-[300px] sm:w-[320px] min-h-[82px] p-4 border-stone-200/95 shadow-[0_16px_40px_rgba(2,44,34,0.12)] text-left'
+                          : `w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center border-stone-200/90 shadow-sm ${
+                              isDimmed
+                                ? 'opacity-45 blur-[1.5px] scale-95'
+                                : 'opacity-100'
+                            }`
+                      }`}
+                    >
+                      {isSelected ? (
+                        <p className="text-[13px] leading-[1.48] text-stone-600">
+                          <span className="inline-flex items-center gap-1.5 align-middle mr-1.5">
+                            <img
+                              src={tool.logoSrc}
+                              alt=""
+                              className={`${
+                                tool.badgeIconClass || 'w-3.5 h-3.5'
+                              } object-contain shrink-0`}
+                            />
+                            <span
+                              className={`font-semibold text-[12.5px] ${tool.nameColor}`}
+                            >
+                              {tool.name}
+                            </span>
                           </span>
-                        </span>
-                        <TypewriterText
-                          text={tool.suggestion}
-                          active={isSelected}
-                          delayMs={240}
-                          speedMs={14}
+                          <TypewriterText
+                            text={tool.suggestion}
+                            active={isSelected}
+                            delayMs={240}
+                            speedMs={14}
+                          />
+                        </p>
+                      ) : (
+                        <img
+                          src={tool.logoSrc}
+                          alt={tool.name}
+                          loading="lazy"
+                          className={`${
+                            tool.mobileIconClass || 'w-7 h-7 sm:w-8 sm:h-8'
+                          } object-contain select-none`}
                         />
-                      </p>
-                    ) : (
-                      <img
-                        src={tool.logoSrc}
-                        alt={tool.name}
-                        loading="lazy"
-                        className={`${
-                          tool.mobileIconClass || 'w-7 h-7 sm:w-8 sm:h-8'
-                        } object-contain select-none`}
-                      />
-                    )}
-                  </button>
+                      )}
+                    </button>
+                  </div>
                 )
               })}
             </div>
           </div>
 
-          {/* Buttons & Microcopy at Bottom */}
+          {/* Microcopy at Bottom */}
           <div className="mt-10 lg:mt-6 flex flex-col items-center text-center">
-
             <p className="mt-5 text-[12.5px] sm:text-[13px] leading-[1.5] tracking-[-0.01em] text-gray-500 max-w-[520px]">
               You choose what connects. TimeFlow reads titles, never the contents of your files, and suggestions are generated on your device.
             </p>
           </div>
-        </FadeInOnScroll>
+        </div>
       </div>
     </section>
   )
