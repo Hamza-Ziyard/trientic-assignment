@@ -3,7 +3,7 @@ import TestimonialsSection from './TestimonialsSection.jsx'
 import FadeInOnScroll from './FadeInOnScroll.jsx'
 
 // Replace with your hero image path (e.g. "/images/hero-img.webp")
-const HERO_IMAGE_SRC = '/images/hero-img.webp'
+const HERO_IMAGE_SRC = '/images/hero-img.png'
 
 // Apple / Linear 3D Rise: positive angle leans top away into depth, hinged at top, smoothly lifting to 0 on scroll
 const INITIAL_TILT_DEG = 10
@@ -58,7 +58,7 @@ export default function HeroSection({ imageSrc = HERO_IMAGE_SRC }) {
   const scaleVal = 0.94 + scrollProgress * 0.06
   const translateYVal = (1 - scrollProgress) * 18
   return (
-    <section className="relative w-full pt-12 sm:pt-16 lg:pt-[84px]">
+    <section className="relative w-full pt-8 sm:pt-12 lg:pt-[clamp(2rem,5vh,5.25rem)]">
       {/* Soft Ambient Mesh Gradient Backdrop (preserving #EBF7DD & #FDF8EA) */}
       <div
         aria-hidden="true"
@@ -85,7 +85,7 @@ export default function HeroSection({ imageSrc = HERO_IMAGE_SRC }) {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-[72px] py-4 lg:py-10 xl:py-16">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-[72px] py-2 lg:py-[clamp(0.5rem,2.5vh,2.5rem)]">
         {/* Top Split Row: Headline + Supporting Copy & CTA */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-12">
           {/* Left Column: Primary Headline */}
@@ -138,13 +138,13 @@ export default function HeroSection({ imageSrc = HERO_IMAGE_SRC }) {
         </div>
       </div>
 
-      {/* Central Visual Block (wider than the 1440px text container, 3D slanted until scrolled into view) */}
+      {/* Central Visual Block (scales fluidly with viewport height so it stays balanced on shorter screens) */}
       <div
         ref={imageWrapRef}
-        className="relative z-10 w-full max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-10"
+        className="relative z-10 w-full max-w-[min(1560px,calc(124vh+220px))] mx-auto px-4 sm:px-6 lg:px-10"
       >
         <FadeInOnScroll
-          className="mt-12 sm:mt-14 lg:mt-[68px] w-full"
+          className="mt-8 sm:mt-10 lg:mt-[clamp(1.75rem,4.5vh,4.25rem)] w-full"
           delay={250}
           duration={1100}
         >

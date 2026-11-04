@@ -7,7 +7,7 @@ const PRIVACY_CARDS = [
     title: 'Bring your own model',
     description:
       'Prefer a model you trust? Connect your own and switch any time. TimeFlow works with what you choose and never locks you in.',
-    imageSrc: '/images/own-model-img.webp',
+    imageSrc: '/images/own-model-img.png',
     imageAlt: 'Model selector showing Claude, GPT, Gemini, DeepSeek, and Custom options',
   },
   {
@@ -15,7 +15,7 @@ const PRIVACY_CARDS = [
     title: 'Insights on your device',
     description:
       'AI summaries are generated on your Mac, Windows PC or phone. Your hours sync through the cloud, but the analysis never has to leave your machine.',
-    imageSrc: '/images/insights-img.webp',
+    imageSrc: '/images/insights-img.png',
     imageAlt: 'Weekly focus insight summary generated on device',
   },
   {
@@ -23,7 +23,7 @@ const PRIVACY_CARDS = [
     title: 'Suggests, never spies',
     description:
       'TimeFlow proposes entries and you confirm each one. No screenshots, no keystroke logging, and you can export or delete your data whenever you like.',
-    imageSrc: '/images/suggesstions-img.webp',
+    imageSrc: '/images/suggesstions-img.png',
     imageAlt: 'Suggested time entry popover for Brightloop Website Redesign with Dismiss and Accept buttons',
   },
 ]
