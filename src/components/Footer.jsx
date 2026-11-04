@@ -152,7 +152,7 @@ export default function Footer() {
                   if (submitted) setSubmitted(false)
                 }}
                 placeholder="Email address"
-                className="flex-1 h-[44px] px-5 rounded-full bg-stone-100/90 border border-stone-200/90 text-[14px] text-emerald-950 placeholder:text-stone-400 focus:outline-none focus:bg-white focus:border-emerald-800 transition-colors"
+                className="lg:flex-1 h-[44px] px-5 rounded-full bg-stone-100/90 border border-stone-200/90 text-[14px] text-emerald-950 placeholder:text-stone-400 focus:outline-none focus:bg-white focus:border-emerald-800 transition-colors"
               />
               <button
                 type="submit"

@@ -1,5 +1,4 @@
 import React from 'react'
-import LogoMarquee from './LogoMarquee.jsx'
 import TestimonialsSection from './TestimonialsSection.jsx'
 import FadeInOnScroll from './FadeInOnScroll.jsx'
 
@@ -109,10 +108,7 @@ export default function HeroSection({ imageSrc = HERO_IMAGE_SRC }) {
         </FadeInOnScroll>
       </div>
 
-      {/* Logo Marquee & Testimonials inside Hero Section */}
-      <FadeInOnScroll className="relative z-10 mt-12 lg:mt-[60px]" duration={1000}>
-        <LogoMarquee />
-      </FadeInOnScroll>
+      {/* Testimonials inside Hero Section */}
       <FadeInOnScroll className="relative z-10 mt-14 lg:mt-[88px]" duration={1000}>
         <TestimonialsSection />
       </FadeInOnScroll>

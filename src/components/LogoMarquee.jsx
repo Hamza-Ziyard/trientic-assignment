@@ -30,23 +30,23 @@ const LOGOS = [
   },
 ]
 
-export default function LogoMarquee() {
+export default function LogoMarquee({ className = '' }) {
   // Duplicate set so each half of the track is identical for seamless -50% loop
   const singleSet = [...LOGOS, ...LOGOS]
 
   return (
-    <section
+    <div
       aria-label="Trusted companies"
-      className="w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-[72px]"
+      className={`w-full ${className}`.trim()}
     >
       {/* Infinite Auto-Scrolling Marquee Track */}
       <div
         className="relative w-full overflow-hidden"
         style={{
           maskImage:
-            'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
+            'linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)',
           WebkitMaskImage:
-            'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
+            'linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)',
         }}
       >
         <div
@@ -79,18 +79,13 @@ export default function LogoMarquee() {
                 <img
                   src={logo.logoSrc}
                   alt=""
-                  className="h-9 sm:h-10 lg:h-11 w-auto object-contain block"
+                  className="h-4 w-auto object-contain block"
                 />
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      {/* Supporting Caption */}
-      <p className="mt-6 text-center text-[12px] tracking-[-0.01em] text-gray-500">
-        Join 4,000+ companies already growing
-      </p>
-    </section>
+    </div>
   )
 }
