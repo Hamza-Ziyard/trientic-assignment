@@ -1,11 +1,62 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import TestimonialsSection from './TestimonialsSection.jsx'
 import FadeInOnScroll from './FadeInOnScroll.jsx'
 
-// Replace with your hero image path (e.g. "/images/hero-dashboard.png")
-const HERO_IMAGE_SRC = ''
+// Replace with your hero image path (e.g. "/images/hero-img.webp")
+const HERO_IMAGE_SRC = '/images/hero-img.webp'
+
+// Apple / Linear 3D Rise: positive angle leans top away into depth, hinged at top, smoothly lifting to 0 on scroll
+const INITIAL_TILT_DEG = 10
 
 export default function HeroSection({ imageSrc = HERO_IMAGE_SRC }) {
+  const imageWrapRef = useRef(null)
+  const [scrollProgress, setScrollProgress] = useState(0)
+
+  useEffect(() => {
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (prefersReducedMotion) {
+      setScrollProgress(1)
+      return
+    }
+
+    let rafId = null
+    const updateTilt = () => {
+      rafId = null
+      const el = imageWrapRef.current
+      if (!el) return
+
+      const viewportHeight = window.innerHeight || 1
+      const scrollY = window.scrollY || window.pageYOffset || 0
+      const targetScroll = Math.max(260, Math.min(480, viewportHeight * 0.42))
+      const raw = Math.max(0, Math.min(1, scrollY / targetScroll))
+      // Cubic ease-out curve for an Apple/Linear-style smooth deceleration
+      const eased = 1 - Math.pow(1 - raw, 3)
+      setScrollProgress(eased)
+    }
+
+    const onScroll = () => {
+      if (rafId === null) {
+        rafId = window.requestAnimationFrame(updateTilt)
+      }
+    }
+
+    updateTilt()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (rafId !== null) window.cancelAnimationFrame(rafId)
+    }
+  }, [])
+
+  const tiltDeg = (1 - scrollProgress) * INITIAL_TILT_DEG
+  const scaleVal = 0.94 + scrollProgress * 0.06
+  const translateYVal = (1 - scrollProgress) * 18
   return (
     <section className="relative w-full pt-12 sm:pt-16 lg:pt-[84px]">
       {/* Soft Ambient Mesh Gradient Backdrop (preserving #EBF7DD & #FDF8EA) */}
@@ -34,7 +85,7 @@ export default function HeroSection({ imageSrc = HERO_IMAGE_SRC }) {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-[72px]">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-[72px] py-4 lg:py-10 xl:py-16">
         {/* Top Split Row: Headline + Supporting Copy & CTA */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-12">
           {/* Left Column: Primary Headline */}
@@ -85,25 +136,77 @@ export default function HeroSection({ imageSrc = HERO_IMAGE_SRC }) {
             </p>
           </FadeInOnScroll>
         </div>
+      </div>
 
-        {/* Central Visual Block (Image Placeholder) */}
+      {/* Central Visual Block (wider than the 1440px text container, 3D slanted until scrolled into view) */}
+      <div
+        ref={imageWrapRef}
+        className="relative z-10 w-full max-w-[1640px] mx-auto px-4 sm:px-6 lg:px-10"
+      >
         <FadeInOnScroll
-          className="mt-10 sm:mt-12 lg:mt-[56px] w-full"
+          className="mt-12 sm:mt-14 lg:mt-[68px] w-full"
           delay={250}
           duration={1100}
         >
           <div
-            role="img"
-            aria-label="Time management product showcase visual"
-            className="w-full h-[280px] sm:h-[420px] md:h-[520px] lg:h-[656px] bg-[#D9D9D9] overflow-hidden flex items-center justify-center"
+            style={{
+              transform: `perspective(1600px) rotateX(${tiltDeg.toFixed(2)}deg) translateY(${translateYVal.toFixed(1)}px) scale(${scaleVal.toFixed(3)})`,
+              transformOrigin: 'center top',
+            }}
+            className="relative w-full transition-transform duration-150 ease-out will-change-transform"
           >
-            {imageSrc ? (
-              <img
-                src={imageSrc}
-                alt="TimeFlow product interface"
-                className="w-full h-full object-cover"
+            {/* Hand-Drawn Corner Accent Marks / "Spark" Rays on Top-Right Outside Corner */}
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 84 84"
+              fill="none"
+              className="pointer-events-none absolute -top-7 -right-5 sm:-top-9 sm:-right-7 lg:-top-11 lg:-right-9 w-[46px] h-[46px] sm:w-[60px] sm:h-[60px] lg:w-[72px] lg:h-[72px] z-20 select-none overflow-visible"
+            >
+              {/* Top-left vertical-ish ray */}
+              <path
+                d="M18 32C19.5 22 22.5 13 26 5"
+                stroke="#A3E635"
+                strokeWidth="7.5"
+                strokeLinecap="round"
+                pathLength="1"
+                style={{ animationDelay: '0.65s' }}
+                className="animate-draw-underline"
               />
-            ) : null}
+              {/* Center diagonal main ray */}
+              <path
+                d="M34 44C44 33 56 21 69 10"
+                stroke="#A3E635"
+                strokeWidth="8"
+                strokeLinecap="round"
+                pathLength="1"
+                style={{ animationDelay: '0.78s' }}
+                className="animate-draw-underline"
+              />
+              {/* Bottom-right horizontal-ish ray */}
+              <path
+                d="M46 62C56 59 67 56.5 78 55"
+                stroke="#A3E635"
+                strokeWidth="7.5"
+                strokeLinecap="round"
+                pathLength="1"
+                style={{ animationDelay: '0.9s' }}
+                className="animate-draw-underline"
+              />
+            </svg>
+
+            <div
+              role="img"
+              aria-label="Time management product showcase visual"
+              className="w-full overflow-hidden rounded-t-[20px] sm:rounded-t-[26px] lg:rounded-t-[30px] shadow-[0_24px_70px_rgba(0,0,0,0.06)] [mask-image:linear-gradient(to_bottom,black_62%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_62%,transparent_100%)]"
+            >
+              {imageSrc ? (
+                <img
+                  src={imageSrc}
+                  alt="TimeFlow product interface"
+                  className="w-full h-auto block object-cover object-top"
+                />
+              ) : null}
+            </div>
           </div>
         </FadeInOnScroll>
       </div>
