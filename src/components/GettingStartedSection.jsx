@@ -38,7 +38,7 @@ export default function GettingStartedSection() {
           </h2>
 
           <p className="mt-4 sm:mt-5 text-[15px] sm:text-[20px] leading-[1.55] tracking-[-0.04em] text-gray-500 max-w-[780px]">
-            Start free on your own and grow into a team without switching tools.
+            Short guides to get you tracking in minutes.
           </p>
         </FadeInOnScroll>
 

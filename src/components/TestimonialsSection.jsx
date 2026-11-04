@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Globe, Star } from 'lucide-react'
 
 const TESTIMONIALS = [
   {
@@ -7,7 +7,7 @@ const TESTIMONIALS = [
     quote:
       'It’s the first time tracker that doesn’t feel like surveillance. My team actually uses it.',
     author: 'Maya Fernando',
-    role: 'Operations Lead, Segmented Agency',
+    role: 'Operations Lead, Segmented Agency | 250 employees',
     avatarSrc: '/images/testimonial-image-1.webp',
   },
   {
@@ -15,7 +15,7 @@ const TESTIMONIALS = [
     quote:
       'Our team tracks on Mac, Windows and phones and everything just syncs. And the AI runs on-device, so our clients’ data stays private.',
     author: 'Priya Nair',
-    role: 'Founder, Oakline Studio',
+    role: 'Founder, Oakline Studio | 10 employees',
     avatarSrc: '/images/testimonial-image-2.webp',
   },
   {
@@ -23,7 +23,7 @@ const TESTIMONIALS = [
     quote:
       'I finally know which clients are worth my time. The weekly review paid for itself in a month.',
     author: 'Daniel Okafor',
-    role: 'Freelance product designer',
+    role: 'Product designer | Freelancer',
     avatarSrc: '/images/testimonial-image-3.webp',
   },
   {
@@ -31,7 +31,7 @@ const TESTIMONIALS = [
     quote:
       'Automated reminders and effortless reporting helped us recover over 12 billable hours per consultant every month.',
     author: 'Elena Rostova',
-    role: 'Managing Partner, Segmented Agency',
+    role: 'Managing Partner, Segmented Agency | 250 employees',
     avatarSrc: '/images/testimonial-image-1.webp',
   },
 ]
@@ -107,9 +107,23 @@ export default function TestimonialsSection() {
         ))}
       </div>
 
-      {/* Carousel Controls aligned to the 1440px grid */}
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-[72px] mt-8 flex justify-end">
-        <div className="flex items-center gap-3.5">
+      {/* Bottom Bar: Rating / Users Stats + Carousel Controls aligned to the 1440px grid */}
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-[72px] mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        {/* Rating and User Count */}
+        <div className="flex flex-wrap items-center gap-3 text-[16px] md:text-[20px] font-semibold text-[#070707]">
+          <div className="flex items-center gap-1.5">
+            <Star className="w-5 h-5 text-amber-400 fill-amber-400 shrink-0" />
+            <span>4.9/5 from 25.2k reviews</span>
+          </div>
+          <span className="text-[#D4D4D8] font-light">|</span>
+          <div className="flex items-center gap-1.5">
+            <Globe className="w-5 h-5 text-gray-500 shrink-0" />
+            <span>1M+ users worldwide</span>
+          </div>
+        </div>
+
+        {/* Carousel Controls */}
+        <div className="flex items-center gap-3.5 self-end sm:self-auto">
           <button
             type="button"
             onClick={() => handleScroll('prev')}
