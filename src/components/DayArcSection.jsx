@@ -693,52 +693,11 @@ export default function DayArcSection() {
             {/* Section Eyebrow & Headline */}
             <SectionHeader isNight={isNight} compact />
 
-            {/* MOBILE (< lg): Horizontal scroll-driven sliding track */}
-            <div className="lg:hidden overflow-hidden -mx-5 px-5 sm:-mx-10 sm:px-10">
-              <div
-                className="flex transition-transform duration-150 ease-out will-change-transform"
-                style={{
-                  width: `${DAY_STOPS.length * 100}%`,
-                  transform: `translate3d(-${
-                    (scrollProgress * (DAY_STOPS.length - 1) * 100) /
-                    DAY_STOPS.length
-                  }%, 0, 0)`,
-                }}
-              >
-                {DAY_STOPS.map((stop, idx) => {
-                  const isActive = idx === activeIndex
-                  return (
-                    <div
-                      key={stop.id}
-                      aria-hidden={!isActive}
-                      style={{ width: `${100 / DAY_STOPS.length}%` }}
-                      className="px-1.5 sm:px-3 shrink-0"
-                    >
-                      <div className="max-w-xl mx-auto">
-                        <h3 className="text-[24px] sm:text-[32px] font-semibold tracking-[-0.03em] leading-[1.12] whitespace-pre-line">
-                          {stop.title}
-                        </h3>
-                        <p
-                          className={`mt-2 sm:mt-3 text-[13.5px] sm:text-[15px] leading-[1.5] mb-4 sm:mb-6 transition-colors duration-300 ${
-                            isNight ? 'text-stone-50/85' : 'text-emerald-950/75'
-                          }`}
-                        >
-                          {stop.copy}
-                        </p>
-
-                        <LiveAppCard stop={stop} />
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-
-            {/* DESKTOP (lg+): 12-Column Grid with 250ms fade swap */}
-            <div className="hidden lg:grid grid-cols-12 gap-10 2xl:gap-16 items-center">
-              {/* Left Column: Moment Title & Copy with 250ms fade swap */}
-              <div className="col-span-5">
-                <div className="relative min-h-[180px] flex flex-col justify-center">
+            {/* RESPONSIVE (Mobile & Desktop): Scroll-driven content replacement with 250ms fade swap */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-7 lg:gap-10 2xl:gap-16 items-center">
+              {/* Left / Top Column: Moment Title & Copy with 250ms fade swap */}
+              <div className="lg:col-span-5 max-w-xl mx-auto lg:max-w-none w-full">
+                <div className="relative min-h-[115px] sm:min-h-[135px] lg:min-h-[180px] flex flex-col justify-center">
                   {DAY_STOPS.map((stop, idx) => {
                     const isActive = idx === activeIndex
                     return (
@@ -748,14 +707,14 @@ export default function DayArcSection() {
                         className={`transition-all duration-[250ms] ease-out ${
                           isActive
                             ? 'opacity-100 translate-y-0 relative'
-                            : 'opacity-0 translate-y-2 pointer-events-none absolute inset-0'
+                            : 'opacity-0 translate-y-2 pointer-events-none absolute inset-0 flex flex-col justify-center'
                         }`}
                       >
-                        <h3 className="text-[clamp(2.25rem,3.4vh,3.25rem)] font-semibold tracking-[-0.032em] leading-[1.12] whitespace-pre-line">
+                        <h3 className="text-[24px] sm:text-[32px] lg:text-[clamp(2.25rem,3.4vh,3.25rem)] font-semibold tracking-[-0.032em] leading-[1.12] whitespace-pre-line">
                           {stop.title}
                         </h3>
                         <p
-                          className={`mt-3.5 text-[clamp(0.95rem,1.6vh,1.125rem)] leading-[1.58] max-w-[440px] transition-colors duration-300 ${
+                          className={`mt-2 sm:mt-3 lg:mt-3.5 text-[13.5px] sm:text-[15px] lg:text-[clamp(0.95rem,1.6vh,1.125rem)] leading-[1.52] lg:leading-[1.58] max-w-[440px] transition-colors duration-300 ${
                             isNight ? 'text-stone-50/85' : 'text-emerald-950/75'
                           }`}
                         >
@@ -767,8 +726,8 @@ export default function DayArcSection() {
                 </div>
               </div>
 
-              {/* Right Column: Live App UI Card with 250ms fade swap */}
-              <div className="col-span-7">
+              {/* Right / Bottom Column: Live App UI Card with 250ms fade swap */}
+              <div className="lg:col-span-7 max-w-xl mx-auto lg:max-w-none w-full">
                 <div className="relative">
                   {DAY_STOPS.map((stop, idx) => {
                     const isActive = idx === activeIndex
