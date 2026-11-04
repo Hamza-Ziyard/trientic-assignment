@@ -1,46 +1,42 @@
-import React, { useMemo } from 'react'
-import { ArrowDownToLine } from 'lucide-react'
+import React, { useState } from 'react'
+import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import FadeInOnScroll from './FadeInOnScroll.jsx'
 import LogoMarquee from './LogoMarquee.jsx'
 
-function getDeviceDownloadInfo() {
-  if (typeof window === 'undefined' || typeof navigator === 'undefined') {
-    return { label: 'Download for Mac', href: '#download-mac' }
-  }
-
-  const ua = navigator.userAgent || ''
-  const platform = navigator.userAgentData?.platform || navigator.platform || ''
-
-  // Detect iOS / iPadOS (including iPad on iOS 13+ reporting as MacIntel with touch points)
-  const isIOS =
-    /iPad|iPhone|iPod/i.test(ua) ||
-    (platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-
-  if (isIOS) {
-    return { label: 'Download for iOS', href: '#download-ios' }
-  }
-
-  if (/Android/i.test(ua)) {
-    return { label: 'Download for Android', href: '#download-android' }
-  }
-
-  if (/Win/i.test(platform) || /Windows/i.test(ua)) {
-    return { label: 'Download for Windows', href: '#download-windows' }
-  }
-
-  if (/Mac/i.test(platform) || /Macintosh|Mac OS X/i.test(ua)) {
-    return { label: 'Download for Mac', href: '#download-mac' }
-  }
-
-  if (/Linux/i.test(platform) || /Linux/i.test(ua)) {
-    return { label: 'Download for Linux', href: '#download-linux' }
-  }
-
-  return { label: 'Download the app', href: '#download' }
-}
+const plans = [
+  {
+    name: 'Starters',
+    tagline: 'Essential time tracking',
+    price: '$0',
+    image: '/images/cta-banner-img.webp',
+    imageAlt: 'Person working on laptop at home',
+  },
+  {
+    name: 'Business',
+    tagline: 'Advanced AI & automations',
+    price: '$12',
+    image: '/images/cta-banner-img-2.webp', // placeholder image
+    imageAlt: 'Pro dashboard insights preview',
+  },
+  {
+    name: 'Enterprise',
+    tagline: 'Custom controls & scale',
+    price: 'Custom',
+    image: '/images/cta-banner-img-3.webp', // placeholder image
+    imageAlt: 'Enterprise team management preview',
+  },
+]
 
 export default function CtaBannerSection() {
-  const downloadInfo = useMemo(() => getDeviceDownloadInfo(), [])
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? plans.length - 1 : prev - 1))
+  }
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === plans.length - 1 ? 0 : prev + 1))
+  }
 
   return (
     <section
@@ -55,7 +51,7 @@ export default function CtaBannerSection() {
               background: 'linear-gradient(235deg, #EBF7DD 0%, #FDF8EA 100%)',
             }}
           >
-            {/* Top Row: Left Content + Right Image */}
+            {/* Top Row: Left Content + Right Image Slider */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-10 lg:pl-8">
               {/* Left Content */}
               <div className="max-w-[580px] py-2 lg:py-6">
@@ -80,26 +76,81 @@ export default function CtaBannerSection() {
                   </a>
 
                   <a
-                    href={downloadInfo.href}
-                    className="inline-flex items-center gap-2 text-[16px] font-semibold tracking-[-0.01em] text-[#070707] hover:opacity-75 transition-opacity"
+                    href="#pricing"
+                    className="inline-flex items-center gap-1.5 text-[16px] font-semibold tracking-[-0.01em] text-[#070707] hover:opacity-75 transition-opacity group"
                   >
-                    <span>{downloadInfo.label}</span>
-                    <ArrowDownToLine
-                      className="w-5 h-5 text-gray-500 stroke-[2]"
+                    <span>Explore plans</span>
+                    <ArrowUpRight
+                      className="w-4 h-4 text-gray-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
                       aria-hidden="true"
                     />
                   </a>
                 </div>
               </div>
 
-              {/* Right Image */}
-              <div className="w-full lg:w-[460px] xl:w-[498px] shrink-0 overflow-hidden rounded-[22px]">
-                <img
-                  src="/images/cta-banner-img.webp"
-                  alt="Person working on a laptop at home"
-                  loading="lazy"
-                  className="w-full h-auto object-cover block"
-                />
+              {/* Right: Plan Image Slider with Overlay Text & Arrows matching screenshot */}
+              <div className="w-full lg:w-[460px] xl:w-[498px] shrink-0">
+                <div className="relative w-full aspect-[16/10] sm:aspect-[16/9.5] lg:h-[290px] xl:h-[305px] rounded-[22px] overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.06)] group select-none">
+                  {/* Sliding Images Container */}
+                  <div
+                    className="flex w-full h-full transition-transform duration-500 ease-out"
+                    style={{
+                      transform: `translateX(-${currentIndex * 100}%)`,
+                    }}
+                  >
+                    {plans.map((plan) => (
+                      <div
+                        key={plan.name}
+                        className="w-full h-full shrink-0 relative"
+                      >
+                        <img
+                          src={plan.image}
+                          alt={plan.imageAlt}
+                          loading="lazy"
+                          className="w-full h-full object-cover block"
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Top-Right Arrow Buttons */}
+                  <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handlePrev}
+                      aria-label="Previous plan"
+                      className="w-8 h-8 rounded-full bg-white/75 hover:bg-white text-neutral-700 hover:text-black flex items-center justify-center backdrop-blur-md shadow-sm transition-all active:scale-95"
+                    >
+                      <ChevronLeft className="w-4 h-4 stroke-[2.2]" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNext}
+                      aria-label="Next plan"
+                      className="w-8 h-8 rounded-full bg-white/75 hover:bg-white text-neutral-700 hover:text-black flex items-center justify-center backdrop-blur-md shadow-sm transition-all active:scale-95"
+                    >
+                      <ChevronRight className="w-4 h-4 stroke-[2.2]" />
+                    </button>
+                  </div>
+
+                  {/* Subtle Gradient for Bottom Text Contrast */}
+                  <div className="absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none z-10" />
+
+                  {/* Bottom Overlay Text: Plan Tagline & Price */}
+                  <div className="absolute inset-x-0 bottom-0 z-20 p-5 sm:p-6 flex items-end justify-between text-white">
+                    <div className="max-w-[70%]">
+                      <p className="text-[15px] sm:text-[17px] font-medium tracking-tight text-white/95 drop-shadow-sm">
+                        {plans[currentIndex].name} plan
+                      </p>
+                    </div>
+
+                    <div className="shrink-0 text-right">
+                      <span className="text-[28px] sm:text-[34px] font-bold leading-none tracking-tight text-white drop-shadow-md">
+                        {plans[currentIndex].price}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -111,4 +162,3 @@ export default function CtaBannerSection() {
     </section>
   )
 }
-
