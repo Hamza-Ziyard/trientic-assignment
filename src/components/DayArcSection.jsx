@@ -23,7 +23,7 @@ const DAY_STOPS = [
     angleDeg: 166,
     title: 'Start without\nthinking about it',
     copy: 'Open a project and TimeFlow offers to start the timer. One tap and you are tracking.',
-    imageSrc: '',
+    imageSrc: '/images/arc-images/09am.png',
     sidebarEntries: [
       { time: '00:00:00', active: true, tags: ['Brightloop'] },
       { time: '12:02', active: false, tags: ['Sprint 02', 'Planning'] },
@@ -41,7 +41,7 @@ const DAY_STOPS = [
     angleDeg: 128,
     title: 'Notices when your\nfocus shifts',
     copy: 'Switch tasks and TimeFlow proposes a split. You confirm it, and nothing changes silently.',
-    imageSrc: '',
+    imageSrc: '/images/arc-images/10.30am.png',
     sidebarEntries: [
       { time: '01:28:00', active: true, tags: ['Brightloop'] },
       { time: '01:04', active: false, tags: ['Homepage layout'] },
@@ -59,7 +59,7 @@ const DAY_STOPS = [
     angleDeg: 90,
     title: 'Breaks without\nthe guilt',
     copy: 'Step away and the timer pauses on a suggestion. Come back and pick up right where you left off.',
-    imageSrc: '',
+    imageSrc: '/images/arc-images/12.30pm.png',
     sidebarEntries: [
       { time: '03:42:10', active: true, tags: ['Paused'], isBreak: true },
       { time: '01:28', active: false, tags: ['Brightloop', 'Layout'] },
@@ -77,7 +77,7 @@ const DAY_STOPS = [
     angleDeg: 52,
     title: 'A quiet heads-up\non budgets',
     copy: 'See when a client project is nearing its budget while there is still time to do something about it.',
-    imageSrc: '',
+    imageSrc: '/images/arc-images/03pm.png',
     sidebarEntries: [
       { time: '05:18:40', active: true, tags: ['Brightloop'] },
       { time: '00:45', active: false, tags: ['Break'], isBreak: true },
@@ -95,7 +95,7 @@ const DAY_STOPS = [
     angleDeg: 14,
     title: 'Close the day\nin one tap',
     copy: 'A private summary of your day, generated on your device, and a timesheet ready to share.',
-    imageSrc: '',
+    imageSrc: '/images/arc-images/05.30pm.png',
     sidebarEntries: [
       { time: '07:12:00', active: true, tags: ['Day Summary'] },
       { time: '05:40', active: false, tags: ['Billable'] },
