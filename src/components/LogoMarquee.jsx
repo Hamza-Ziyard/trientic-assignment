@@ -63,7 +63,7 @@ export default function LogoMarquee({ className = '' }) {
                 <img
                   src={logo.logoSrc}
                   alt={logo.name}
-                  className="h-9 sm:h-10 lg:h-11 w-auto object-contain block"
+                  className="h-8 w-auto object-contain block"
                 />
               </div>
             ))}
@@ -79,7 +79,7 @@ export default function LogoMarquee({ className = '' }) {
                 <img
                   src={logo.logoSrc}
                   alt=""
-                  className="h-4 w-auto object-contain block"
+                  className="h-8 w-auto object-contain block"
                 />
               </div>
             ))}
