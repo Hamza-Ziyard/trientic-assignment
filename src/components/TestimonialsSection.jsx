@@ -75,12 +75,12 @@ export default function TestimonialsSection() {
             className="min-h-[224px] bg-white rounded-[32px] px-7 py-7 sm:px-9 sm:py-8 flex flex-col justify-between"
           >
             {/* Top: Quote Image + Text */}
-            <div className="flex items-start gap-4">
+            <div className="md:flex items-start gap-4">
               <img
                 src="/images/quote.webp"
                 alt=""
                 aria-hidden="true"
-                className="w-10 h-auto shrink-0 mt-1 select-none"
+                className="pb-6 md:pb-0 w-10 h-auto shrink-0 mt-1 select-none"
               />
               <p className="text-[16px] sm:text-[15.5px] font-medium leading-[1.46] tracking-[-0.015em] text-[#070707]">
                 {item.quote}
@@ -88,7 +88,7 @@ export default function TestimonialsSection() {
             </div>
 
             {/* Bottom: Avatar Image + Author Info */}
-            <div className="mt-6 pl-11 flex items-center gap-3.5">
+            <div className="mt-6 pl-0 md:pl-11 flex items-center gap-3.5">
               <img
                 src={item.avatarSrc}
                 alt={item.author}

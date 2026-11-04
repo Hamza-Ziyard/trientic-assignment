@@ -282,7 +282,7 @@ export default function IntegrationsSection() {
           </p>
 
           <div className="mt-10 lg:mt-6 flex flex-col items-start">
-            <div className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4">
+            <div className="flex flex-wrap gap-3.5 sm:gap-4">
               <a
                 href="#integrations"
                 className="inline-flex items-center justify-center gap-2 bg-[#070707] text-white text-[15px] sm:text-[16px] font-medium h-[48px] sm:h-[52px] px-7 rounded-full border-[3px] border-[#A3E635] hover:bg-black/85 transition-colors"
