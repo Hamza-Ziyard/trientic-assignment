@@ -62,7 +62,7 @@ const INTEGRATIONS = [
     expandShift: 'translate-x-0 -translate-y-2',
     dropDelayMs: 60,
     suggestion:
-      'moved BRI-142 to In Review after 50m. Add to Sprint 04 — Frontend?',
+      'moved BRI-142 to In Review after 50m. Add to Sprint 04 - Frontend?',
   },
   {
     id: 'slack',
@@ -90,7 +90,7 @@ const INTEGRATIONS = [
     expandShift: '-translate-x-4 -translate-y-2',
     dropDelayMs: 140,
     suggestion:
-      'tracked 1h 25m active in ‘Brightloop — Homepage v3’. Add to Design Phase?',
+      'tracked 1h 25m active in ‘Brightloop - Homepage v3’. Add to Design Phase?',
   },
   {
     id: 'claude',
